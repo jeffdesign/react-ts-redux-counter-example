@@ -27,8 +27,8 @@ export const counterSlice = createSlice({
     reset: (state) => {
       state.value = 0;
     },
-    noOp: (state) => {
-      state.value = state.value;
+    noOp: (state, action: PayloadAction<number>) => {
+      state.value = action.payload;
     },
   },
 });
@@ -49,7 +49,7 @@ export const incrementIfFizzBuzz =
     } else if (currentValue % 5 === 0) {
       dispatch(incrementByAmount(amount));
     } else {
-      dispatch(noOp());
+      dispatch(noOp(currentValue));
     }
   };
 
@@ -58,7 +58,7 @@ export const decrementIfPositive = (): AppThunk => (dispatch, getState) => {
   if (currentValue > 0) {
     dispatch(decrement());
   } else {
-    dispatch(noOp());
+    dispatch(noOp(currentValue));
   }
 };
 
