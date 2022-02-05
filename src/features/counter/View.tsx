@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
+import { useState } from "react";
 
-import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import {
-  decrement,
+  decrementIfPositive,
   increment,
   incrementByAmount,
-  incrementAsync,
-  incrementIfOdd,
+  incrementIfFizzBuzz,
   selectCount,
-} from './counterSlice';
-import styles from './Counter.module.css';
+  reset,
+} from "./update";
+import styles from "./Counter.module.css";
 
 export function Counter() {
   const count = useAppSelector(selectCount);
   const dispatch = useAppDispatch();
-  const [incrementAmount, setIncrementAmount] = useState('2');
+  const [incrementAmount, setIncrementAmount] = useState("5");
 
   const incrementValue = Number(incrementAmount) || 0;
 
@@ -24,7 +24,7 @@ export function Counter() {
         <button
           className={styles.button}
           aria-label="Decrement value"
-          onClick={() => dispatch(decrement())}
+          onClick={() => dispatch(decrementIfPositive())}
         >
           -
         </button>
@@ -51,16 +51,13 @@ export function Counter() {
           Add Amount
         </button>
         <button
-          className={styles.asyncButton}
-          onClick={() => dispatch(incrementAsync(incrementValue))}
-        >
-          Add Async
-        </button>
-        <button
           className={styles.button}
-          onClick={() => dispatch(incrementIfOdd(incrementValue))}
+          onClick={() => dispatch(incrementIfFizzBuzz(incrementValue))}
         >
-          Add If Odd
+          Add If Fizz Buzz
+        </button>
+        <button className={styles.button} onClick={() => dispatch(reset())}>
+          Reset
         </button>
       </div>
     </div>
