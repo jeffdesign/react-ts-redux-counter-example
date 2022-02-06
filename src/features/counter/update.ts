@@ -6,10 +6,8 @@ export interface CounterState {
   status: "idle" | "loading" | "failed";
 }
 
-const initialValue = 1;
-
 const initialState: CounterState = {
-  value: initialValue,
+  value: 1,
   status: "idle",
 };
 
@@ -27,7 +25,7 @@ export const counterSlice = createSlice({
       state.value += action.payload;
     },
     reset: (state) => {
-      state.value = initialValue;
+      state.value = initialState.value;
     },
     noOp: (state, action: PayloadAction<number>) => {
       state.value = action.payload;
