@@ -6,8 +6,10 @@ export interface CounterState {
   status: "idle" | "loading" | "failed";
 }
 
+const initialValue = 1;
+
 const initialState: CounterState = {
-  value: 0,
+  value: initialValue,
   status: "idle",
 };
 
@@ -25,7 +27,7 @@ export const counterSlice = createSlice({
       state.value += action.payload;
     },
     reset: (state) => {
-      state.value = 0;
+      state.value = initialValue;
     },
     noOp: (state, action: PayloadAction<number>) => {
       state.value = action.payload;
@@ -55,7 +57,7 @@ export const incrementIfFizzBuzz =
 
 export const decrementIfPositive = (): AppThunk => (dispatch, getState) => {
   const currentValue = selectCount(getState());
-  if (currentValue > 0) {
+  if (currentValue > 1) {
     dispatch(decrement());
   } else {
     dispatch(noOp(currentValue));
